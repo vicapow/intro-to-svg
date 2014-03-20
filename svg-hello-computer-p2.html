@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <svg width="800" height="600">
+      <g class="right-eye eye" transform="translate(264, 198)">
+        <g>
+          <circle r="40"></circle>
+        </g>
+      </g>
+      <g class="left-eye eye" transform="translate(528, 198)">
+        <g>
+          <circle r="40"></circle>
+        </g>
+      </g>
+      <g class="mouth" transform="translate(400, 420)">
+        <g>
+          <circle r="40"></circle>
+        </g>
+      </g>
+    </svg>
+    <script src="d3.js" charset="utf-8"></script>
+    <script>
+
+var w = window.innerWidth, h = window.innerHeight
+
+function blink(){
+  d3.selectAll('.eye').select('g')
+    .transition()
+    .attr('transform', 'scale(1, 0)')
+    .transition()
+    .attr('transform', 'scale(1, 1)')
+}
+
+function open_close_mouth(){
+  d3.select('.mouth').select('g')
+    .transition().duration(100)
+    .attr('transform', 'scale(1, 1)')
+    .transition().duration(100)
+    .attr('transform', 'scale(1, 0.1)')
+}
+
+function talk(){
+  // open and close the mouth
+  open_close_mouth()
+  // periodically, blink
+  if(Math.random() > .9) blink()
+  setTimeout(talk, Math.random() * 200 + 100)
+}
+
+talk()
+
+    </script>
+  </body>
+</html>
